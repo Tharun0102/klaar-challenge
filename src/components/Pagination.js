@@ -3,28 +3,25 @@ import React, { useState, useEffect } from 'react';
 import './Styles/BankTable.css';
 import './Styles/Pagination.css';
 
-const Pagination = ({ data, title, pages, setPages, dataLimit, setDataLimit }) => {
+const Pagination = ({ city, data, title, pages, setPages, dataLimit, setDataLimit }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [starred, setStarred] = useState([]);
 
 
   useEffect(() => {
-    let array = localStorage.getItem('starredArray');
+    let array = localStorage.getItem(`starred-${city}`);
     if (array) {
-      array = JSON.parse(array);
-    }
-    if (array) {
-      setStarred(array);
+      setStarred(JSON.parse(array));
     } else {
       const dummy_array = [];
       for (let i = 0; i < data.length; i++) {
         dummy_array.push(false);
       }
       setStarred({ ...dummy_array });
-      localStorage.setItem('starredArray', JSON.stringify(dummy_array));
+      localStorage.setItem(`starred-${city}`, JSON.stringify(dummy_array));
     }
-  }, []);
+  }, [city]);
 
 
 
@@ -77,7 +74,7 @@ const Pagination = ({ data, title, pages, setPages, dataLimit, setDataLimit }) =
                       onClick={
                         () => {
                           starred[currId - 1] = !starred[currId - 1];
-                          localStorage.setItem('starredArray', JSON.stringify(starred));
+                          localStorage.setItem(`starred-${city}`, JSON.stringify(starred));
                           setStarred({ ...starred });
                         }
                       }

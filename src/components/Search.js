@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = ({ setPages, setListState, dataLimit }) => {
+const Search = ({ city, setPages, setListState, dataLimit }) => {
   const [value, setValue] = useState('');
 
   const hasText = (data, value) => {
@@ -16,7 +16,7 @@ const Search = ({ setPages, setListState, dataLimit }) => {
   const onType = (e) => {
     setValue(e.target.value);
     //search
-    const originalList = JSON.parse(localStorage.getItem('my-list'));
+    const originalList = JSON.parse(localStorage.getItem(city));
     const newList = originalList.filter((data) => {
       return hasText(data, e.target.value);
     });

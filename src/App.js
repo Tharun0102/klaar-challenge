@@ -4,7 +4,6 @@ import BankList from './components/BankList';
 
 
 function App() {
-  console.log("start");
   return (
     <div className="App">
       <nav className="title">
